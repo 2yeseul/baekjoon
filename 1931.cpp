@@ -3,33 +3,25 @@
 #include <utility>
 #include <vector>
 using namespace std;
-
-
 int main(){
-    vector<pair<int,int>> conf; // 회의 시작 - 끝
+    vector<pair<int,int> > conf; // 회의 시작 - 끝
     int num; // 회의수
-	cout<<"Enter the number of conf\n";
-    cin>>num;
+	cin>>num;
     for(int i=0;i<num;i++) {
         int start,end;
-        cout<<"Enter the time of start and the end\n";
         cin>>start>>end;
-        conf.push_back(make_pair(start, end));
+        conf.push_back(make_pair(end, start));
     }
     sort(conf.begin(), conf.end());
-
-    for(int i=0;i<conf.size();i++){
-        cout<<conf[i].first<<" "<<conf[i].second<<endl;
-    }
-
     int index = 0;
     int count = 1;
+    int pivotValue = conf[0].first;
     for(int i=1;i<num;i++) {
-        if(conf[index].second <= conf[i].first) {
-            count++;
+        if(conf[index].first <= conf[i].second) {
             index = i;
+            count++;
         } 
     }
-    cout<<count<<endl;
+    cout<<count<<"\n";
 	return 0;
 }
